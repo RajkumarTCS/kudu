@@ -1,0 +1,30 @@
+﻿@model Kudu.Web.Models.ApplicationViewModel
+
+@{
+    ViewBag.Title = "New Application";
+}
+
+@if (!ViewData.ModelState.IsValid)
+{ 
+<div class="alert alert-error">
+@Html.ValidationSummary(true)
+</div>
+}
+
+@using (Html.BeginForm())
+{    
+  <fieldset>
+    <legend>New Application</legend>
+    <div class="control-group">
+      @Html.LabelFor(model => model.Name)
+      <div class="controls">        
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+        <p class="help-block">Name of the application</p>
+      </div>
+    </div>
+    <p>
+        <input type="submit" value="Create application" class="btn-primary" />
+    </p>
+  </fieldset>
+}

@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),Kudu.sln))\Build\Kudu.targets" />
+  <PropertyGroup>
+    <ProjectGuid>{6295D938-63FD-4C26-AE00-B32776CC689E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kudu.Services.Web</RootNamespace>
+    <AssemblyName>Kudu.Services.Web</AssemblyName>
+    <OutputPath>bin</OutputPath>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.0.26.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.0.26\lib\net40\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.0.0.7\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IO.Abstractions, Version=1.4.0.74, Culture=neutral, PublicKeyToken=d480b5b72fb413da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.IO.Abstractions.1.4.0.74\lib\net35\System.IO.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivator, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivator.1.5.3\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="XmlSettings, Version=0.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\XmlSettings.0.1.3\lib\net40\XmlSettings.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Images\collapse.gif" />
+    <Content Include="Content\Images\expand.gif" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-bg_glass_75_ffffff_1x400.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-bg_inset-soft_95_fef1ec_1x100.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-icons_454545_256x240.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-icons_888888_256x240.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\Images\jquery-ui-theme\ui-icons_f6cf3b_256x240.png" />
+    <Content Include="Content\Images\Windows Azure Web Site.png" />
+    <Content Include="Content\Scripts\jquery.contextMenu.js" />
+    <Content Include="Content\Scripts\KuduExec.js" />
+    <Content Include="Content\Scripts\ProcessExplorer.js" />
+    <Content Include="Content\Scripts\SiteExtensions.js" />
+    <Content Include="Content\Scripts\vkbeautify.0.99.00.beta.js" />
+    <Content Include="Content\Styles\FileBrowser.css" />
+    <Content Include="Content\Scripts\jquery-console\jquery.console.js" />
+    <Content Include="Content\Scripts\KuduExecV2.js" />
+    <Content Include="Content\Scripts\FileBrowser.js" />
+    <Content Include="Content\Styles\jquery-ui-1.10.0.custom.css" />
+    <Content Include="Content\Styles\jquery.contextMenu.css" />
+    <Content Include="Content\Styles\ProcessExplorer.css" />
+    <Content Include="Content\Styles\SiteExtensions.css" />
+    <Content Include="Content\Scripts\jquery.signalR-2.1.1.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Common\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="App_Start\TraceDeprecatedActionAttribute.cs" />
+    <Compile Include="Infrastruture\HttpHandlerRouteHandler.cs" />
+    <Compile Include="Infrastruture\RouteCollectionExtensions.cs" />
+    <Compile Include="Security\BlockLocalhostModule.cs" />
+    <Compile Include="Services\DeploymentEnvironment.cs" />
+    <Compile Include="Services\NinjectWebApiDependencyResolver.cs" />
+    <Compile Include="Services\NinjectHttpApplicationPlugin.cs" />
+    <Compile Include="Tracing\TraceExceptionFilterAttribute.cs" />
+    <Compile Include="Tracing\TraceModule.cs" />
+    <Compile Include="Tracing\TraceServices.cs" />
+    <Compile Include="App_Start\NinjectServices.cs" />
+    <Compile Include="App_Start\PathResolver.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Kudu.Console\Services\BuildPropertyProvider.cs">
+      <Link>Services\BuildPropertyProvider.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kudu.Console\Kudu.Console.csproj">
+      <Project>{e2b0ee28-8c96-497a-ab08-605b9fd841e9}</Project>
+      <Name>Kudu.Console</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\Kudu.Contracts\Kudu.Contracts.csproj">
+      <Project>{EC0ED988-2C60-4F31-A434-645E048BFD95}</Project>
+      <Name>Kudu.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kudu.Core\Kudu.Core.csproj">
+      <Project>{5320177C-725A-44BD-8FA6-F88D9725B46C}</Project>
+      <Name>Kudu.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kudu.Services\Kudu.Services.csproj">
+      <Project>{D163E227-9EB6-4619-AD37-D8EEF831AEF0}</Project>
+      <Name>Kudu.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="ProcessExplorer\Default.cshtml" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Scripts\jquery-console\README" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Default.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Env.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WebHooks.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DebugConsole\Default.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SiteExtensions\Default.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Support\Default.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>37911</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:13073/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+  <Target Name="AfterClean">
+    <ItemGroup>
+      <directoryToDelete Include="bin" />
+    </ItemGroup>
+    <RemoveDir Directories="@(directoryToDelete)" />
+  </Target>
+  <Target Name="AfterBuild">
+    <PropertyGroup>
+      <BuildOutputsUpdated Condition=" '$(_AssemblyTimestampBeforeCompile)' != '$(_AssemblyTimestampAfterCompile)' ">true</BuildOutputsUpdated>
+    </PropertyGroup>
+    <Message Text="Running post build events" Importance="High" />
+    <Exec Command="&quot;$(ProjectDir)\updateNodeModules.cmd&quot; &quot;$(TargetDir)&quot;" Condition=" '$(BuildOutputsUpdated)' == 'true' " />
+    <Exec Command="&quot;%PROGRAMFILES(X86)%\Git\bin\git.exe&quot; rev-parse HEAD &gt; &quot;$(MsBuildProjectDirectory)\commit.txt&quot;" Condition=" '$(BuildOutputsUpdated)' == 'true' " />
+    <Copy SourceFiles="$(SolutionDir)\Kudu.Console\bin\$(ConfigurationName)\kudu.exe" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <ItemGroup>
+      <ScriptFilesToCopy Include="..\packages\KuduHandles*\KuduHandles.exe" />
+      <ScriptFilesToCopy Include="..\packages\KuduSync.NET*\tools\*" />
+      <ScriptFilesToCopy Include="..\Build\NuGet.exe" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ScriptFilesToCopy)" DestinationFolder="$(TargetDir)\Scripts" SkipUnchangedFiles="true" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Diagnostics.Tracing.EventRegister.1.0.26\build\Microsoft.Diagnostics.Tracing.EventRegister.targets" Condition="Exists('..\packages\Microsoft.Diagnostics.Tracing.EventRegister.1.0.26\build\Microsoft.Diagnostics.Tracing.EventRegister.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Diagnostics.Tracing.EventRegister.1.0.26\build\Microsoft.Diagnostics.Tracing.EventRegister.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Diagnostics.Tracing.EventRegister.1.0.26\build\Microsoft.Diagnostics.Tracing.EventRegister.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+</Project>

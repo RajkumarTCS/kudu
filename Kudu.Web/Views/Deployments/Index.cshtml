@@ -1,0 +1,129 @@
+﻿@using Kudu.Core.SourceControl
+@using Kudu.Web.Models
+
+@model ApplicationViewModel
+@{
+    ViewBag.Title = "Deployments";
+}
+
+<form class="well form-inline">
+  <label class="control-label"><strong>GIT URL</strong></label>
+  <input type="input" id="clone-url" name="name" value="@Model.GitUrl" readonly="readonly" />
+</form>
+
+<form method="post" class="well form-inline" action="@Url.Action("TriggerFetch", new { slug = ViewBag.slug })" id="triggerForm">
+    <fieldset>
+        <legend>Trigger deployment</legend>
+        <label class="control-label">
+            <strong>Repository Url</strong>
+            <input type="text" name="repositoryUrl" data-val="true" data-val-required="*" />
+        </label>
+        @Html.DropDownList("repositoryType", new[] { new SelectListItem { Text = RepositoryType.Git.ToString() }, new SelectListItem { Text = RepositoryType.Mercurial.ToString() } })
+        <button type="submit" class="btn" data-loading-text="Fetching...">Go</button>
+    </fieldset>
+</form>
+
+@if (Model.Deployments.Count == 0)
+{
+    <p class="alert alert-info">You haven't pushed anything to this repository yet.</p>
+    return;
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Message
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Deployer
+            </th>
+            <th>
+                Start Time
+            </th>
+            <th>
+                End Time
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var d in Model.Deployments)
+        {
+            <tr>
+            <td>@d.Id.Substring(0, 10)</td>
+            <td><div class="ellipsis" style="width:450px">@d.Message</div></td>
+            <td>@d.Author</td>
+            <td>@d.Deployer</td>
+            <td>@d.StartTime</td>
+            <td>@d.EndTime</td>
+            <td>
+                @if (d.Complete)
+                {
+                    if (d.Status == Kudu.Core.Deployment.DeployStatus.Failed) 
+                    {
+                         <span class="label label-important">Failed</span>
+                    }
+                    else
+                    {
+                        <span class="label label-success">Success</span>
+                    }
+                }
+                else
+                {
+                    <span class="label">@d.Status</span>
+                }
+            </td>
+            <td style="width: 100px">
+                @if (d.Current)
+                {
+                    <div class="icon-ok"></div>
+                }
+                else if (d.Complete)
+                {
+<div class="btn-group">
+  <a class="btn" href="#">Action</a>
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li><a href="@Url.Action("deploy", "deployments", new { slug = ViewBag.slug, id = d.Id })"><i class="icon-repeat"></i> Deploy</a></li>
+    <li><a href="@Url.Action("deploy", "deployments", new { slug = ViewBag.slug, id = d.Id, clean = true })"><i class="icon-repeat"></i> Deploy (clean)</a></li>
+  </ul>
+</div>
+                }
+            </td>
+            <td style="width:60px">
+                <a href="@Url.Action("log", "deployments", new { slug = ViewBag.slug, id = d.Id })">View Log</a>
+            </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+$(function () {
+    var triggerForm = $("#triggerForm");
+    triggerForm.submit(function () {
+        triggerForm.find(".btn").button("loading");
+        $.post(this.action, triggerForm.serialize())
+         .always(function () {
+             location.reload(false);
+         });
+        
+        return false;
+    });
+});
+</script>

@@ -1,0 +1,99 @@
+﻿@using System.IO
+@using System.Web.Hosting
+@using Kudu.Services.Web
+@using Kudu.Services
+
+@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "Kudu Services";
+}
+
+@section PageHead {
+    <style type="text/css">
+        .row > div {
+            padding-bottom: 10px;
+        }
+    </style>
+}
+
+<div class="container">
+    @{
+        string commitFile = Server.MapPath("~/commit.txt");
+        string sha = File.Exists(commitFile) ? File.ReadAllText(commitFile).Trim() : null;
+        var version = typeof(Kudu.Services.Web.Tracing.TraceModule).Assembly.GetName().Version;
+    }
+
+    <h3>Environment</h3>
+    <div class="row">
+        <div class="col-xs-2">
+            <strong>Build</strong>
+        </div>
+        <div>
+            @version
+            @if (!String.IsNullOrEmpty(sha))
+            {
+                <text>
+                    (<a id="sha" href="https://github.com/projectkudu/kudu/commit/@sha">@sha.Substring(0, 10)</a>)
+                </text>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2">
+            <strong>Site up time</strong>
+        </div>
+        <div>
+            @Kudu.Services.Web.Tracing.TraceModule.UpTime
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">
+            <strong>Site folder</strong>
+        </div>
+        <div>
+            @Kudu.Services.Web.PathResolver.ResolveRootPath()
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">
+            <strong>Temp folder</strong>
+        </div>
+        <div>
+            @Path.GetTempPath()
+        </div>
+    </div>
+
+    <h3>REST API <small>(works best when using a JSON viewer extension)</small></h3>
+    <ul>
+        <li>
+            <a href="api/settings">App Settings</a>
+        </li>
+        <li>
+            <a href="api/deployments">Deployments</a>
+        </li>
+        <li>
+            <a href="api/vfs">Files</a>
+        </li>
+        <li>
+            <a href="api/processes">Processes and mini-dumps</a>
+        </li>
+        <li>
+            <a href="api/diagnostics/runtime">Runtime versions</a>
+        </li>
+        <li>
+            Site Extensions: <a href="api/siteextensions">installed</a> | <a href="api/extensionfeed">feed</a>
+        </li>
+        <li>
+            <a href="api/scm/info">Source control info</a>
+        </li>
+        <li>
+            <a href="api/hooks">Web hooks</a>
+        </li>
+        <li>
+            WebJobs: <a href="api/webjobs">all</a> | <a href="api/triggeredwebjobs">triggered</a> | <a href="api/continuouswebjobs">continuous</a>
+        </li>
+    </ul>
+
+    <h3>More information about Kudu can be found on the <a href="https://github.com/projectkudu/kudu/wiki">wiki</a>.</h3>
+</div>
